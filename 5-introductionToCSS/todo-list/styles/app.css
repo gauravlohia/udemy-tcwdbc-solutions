@@ -1,0 +1,21 @@
+li {
+    border: 2px solid red;
+}
+
+/* To select a particular element on the page we have to give
+an id to the desired element in the html page. */
+
+/* We can only use an id once in a page */
+
+#special {
+    background: royalblue;
+}
+
+/* To give a common style to many elements we can use the 
+class attribute in the html. We give the same class to all
+elements that needs similar styling. */
+
+/* We refer to classes in css files with a .<classname> syntax */
+.coding {
+    background-color: brown;
+}
