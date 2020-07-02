@@ -1,0 +1,28 @@
+/* selector {
+                property: value;
+            } */
+
+h1 {
+    color: rgba(255, 0, 0, 0.4);
+    border-color: purple;
+    border-width: 5px;
+    border-style: solid;
+    text-align: center;
+}
+
+li {
+    color: orange;
+}
+
+div {
+    background: rgb(255, 100, 100);
+}
+
+body {
+    background: pink;
+    /* background: url(./assets/img/6799184-grunge-metal-surface-as-a-background-motive.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; */
+
+}
