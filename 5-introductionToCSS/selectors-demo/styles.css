@@ -18,9 +18,9 @@ li a {
     color: green;
 }
 
-li a:visited {
+/* li a:visited {
     color: yellow;
-}
+} */
 
 /* Adjacent Selectors */
 h4 + ul {
@@ -31,6 +31,10 @@ h4 + ul {
 a[href="http://www.google.com"] {
     background: blue;
 }
+
+/* input[type="checkbox"] {
+
+} */
 
 /* nth of type */
 li:nth-of-type(3) {
