@@ -1,0 +1,52 @@
+/* font-family */
+p {
+    font-family: Arial;
+}
+
+h1 {
+    font-family: "Baskerville";
+}
+
+/* font-size */
+/* Use px unit to specify the absolute font-size */
+body {
+    font-size: 10px;
+}
+/* Use em unit to specify the font size relative to the font size of the parent element */
+h1 {
+    font-size: 5.0em;
+}
+
+p {
+    font-size: 2.0em;
+}
+
+span {
+    font-size: 2.0em;
+}
+
+/* font-weight */
+/* Font weight decided how bold or light the text is. */
+p {
+    font-weight: 400;
+}
+
+/* line-height */
+/* line-height property lets us change the line spacing */
+p {
+    line-height: 1.5;
+}
+
+/* text-align */
+/* Controls how a text is aligned with respect to the parent */
+h1 {
+    text-align: right;
+}
+p {
+    text-align:center;
+}
+
+/* text-decoration */
+p {
+    text-decoration: underline;
+}
