@@ -1,6 +1,6 @@
 var numberOfSquares = 6;
 var colors = generateRandomColors(numberOfSquares);
-var winnerColor = pickRandomColor();
+var winnerColor = pickRandomColor(numberOfSquares);
 
 var squares = document.querySelectorAll(".square");
 var messageDisplay = document.querySelector("#message");
