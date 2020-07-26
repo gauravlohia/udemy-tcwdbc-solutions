@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery Selectors</title>
+</head>
+
+<body>
+    <div>Div 1</div>
+    <div class="highlight">Div 2</div>
+    <div id="third">Div 3</div>
+    <div class="highlight">Div 4</div>
+    <script src="../jquery.js"></script>
+    <script>
+        $("div").css("background", "purple");
+        $(".highlight").css("width", "200px");
+        $("#third").css("border", "2px solid orange");
+        $("div:first-of-type").css("color", "pink");
+    </script>
+</body>
+
+</html>
