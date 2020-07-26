@@ -1,0 +1,67 @@
+body {
+    background-color: #232323;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+}
+
+#header {
+    text-align: center;
+    background-color: rgb(27, 114, 141);
+    font-weight: 400;
+    height: 100%;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+}
+
+#colorDisplay {
+    font-size: 5.0rem;
+    display: block;
+}
+
+#stripe {
+    background: rgb(228, 228, 228);
+    text-align: center;
+    height: 30px;
+}
+
+#message {
+    width:300px;
+    display: inline-block;
+}
+
+#container {
+    width: 50%;
+    margin: 20px auto;
+}
+
+.square {
+    float: left;
+    background: purple;
+    width: 30%;
+    margin: 1.66%;
+    padding-bottom: 30%;
+    border-radius: 15%;
+}
+
+button {
+    border: none;
+    background: none;
+    height: 100%;
+    text-transform: uppercase;
+    color: steelblue;
+    font-weight: 800;
+    font-size: 1rem;
+    outline: none;
+}
+
+button:hover {
+    background: steelblue;
+    color: white;
+}
+
+.selected {
+    background: blue;
+    color: white;
+}
