@@ -3,11 +3,23 @@
 <head>
     <title>Todo List</title>
     <link rel="stylesheet" href="assets/css/todos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/869006a656.js" crossorigin="anonymous"></script>
     <script src="assets/js/lib/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
-    <h1>Hello World!</h1>
+    <div id="container">
+        <h1>To-Do List<i class="fas fa-plus"></i></h1>
+        <input type="text" placeholder="Add New ToDo">
+
+        <ul>
+            <li><span><i class="fa fa-trash"></i></span> Go to potions class</li>
+            <li><span><i class="fa fa-trash"></i></span> Buy new robes</li>
+            <li><span><i class="fa fa-trash"></i></span> Visit Hagrid</li>
+        </ul>
+    </div>
+
     <script src="assets/js/todos.js"></script>
 </body>
 </html>
