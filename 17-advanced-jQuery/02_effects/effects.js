@@ -1,0 +1,10 @@
+// $("button").on("click", function() {
+//     $("div").fadeOut(1000, function() {
+//         // console.log("Fade Completed");
+//         $(this).remove();
+//     });
+// })
+
+$("button").on("click", function () {
+    $("div").slideToggle(1000);
+})
