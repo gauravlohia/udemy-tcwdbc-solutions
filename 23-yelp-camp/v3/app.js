@@ -6,11 +6,11 @@ var mongoose = require('mongoose');
 var Campground = require('./models/campground');
 var seedDB = require('./seeds');
 
-seedDB();
 
 mongoose.connect("mongodb://localhost:27017/yelpcamp", { useNewUrlParser: true, useUnifiedTopology: true })
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
+seedDB();
 
 
 app.get('/', (req, res) => {
@@ -59,10 +59,11 @@ app.get('/campgrounds/new', (req, res) => {
 app.get('/campgrounds/:id', (req, res) => {
     // find the campground with provided ID
     var id = req.params.id;
-    Campground.findById(id, (err, foundCampground) => {
+    Campground.findById(id).populate("comments").exec((err, foundCampground) => {
         if (err) {
             console.log(err);
         } else {
+            console.log(foundCampground);
             //render show template with that campground
             res.render("show", {campground: foundCampground});
         }
