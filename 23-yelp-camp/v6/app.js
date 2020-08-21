@@ -90,7 +90,7 @@ app.get('/campgrounds/:id', (req, res) => {
 // ============================================================================
 // COMMENTS ROUTES
 // ============================================================================
-app.get("/campgrounds/:id/comments/new", (req, res) => {
+app.get("/campgrounds/:id/comments/new", isLoggedIn,  (req, res) => {
     //find campground by id
     Campground.findById(req.params.id, (err, campground) => {
         if (err) {
@@ -101,7 +101,8 @@ app.get("/campgrounds/:id/comments/new", (req, res) => {
     });
 });
 
-app.post("/campgrounds/:id/comments", (req, res) => {
+// add isLoggedIn to this route to protect comment creation withoutn logging in
+app.post("/campgrounds/:id/comments", isLoggedIn, (req, res) => {
     // look up campground using id
     Campground.findById(req.params.id, (err, campground) => {
         if (err) {
@@ -158,6 +159,19 @@ app.post("/login", passport.authenticate("local", {
     failureRedirect: "/login"
 }), (req, res) => {
 });
+
+// logout route
+app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/campgrounds");
+});
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.listen(port, () => {
     console.log(`YelpCamp started at http://localhost:${port}`);
