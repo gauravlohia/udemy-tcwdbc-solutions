@@ -1,17 +1,20 @@
-var express = require('express');
-var app = express();
-var port = 5000;
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var Campground = require('./models/campground');
-var Comment = require('./models/comment');
-var seedDB = require('./seeds');
+var express = require('express'),
+    app = express(),
+    port = 5000,
+    mongoose = require('mongoose'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local'),
+    Campground = require('./models/campground'),
+    Comment = require('./models/comment'),
+    User = require("./models/user"),
+    seedDB = require('./seeds');
 
 
 mongoose.connect("mongodb://localhost:27017/yelpcamp", { useNewUrlParser: true, useUnifiedTopology: true })
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded());
 seedDB();
 
 
@@ -81,7 +84,7 @@ app.get("/campgrounds/:id/comments/new", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.render("comments/new", {campground: campground});
+            res.render("comments/new", { campground: campground });
         }
     });
 });
@@ -95,7 +98,7 @@ app.post("/campgrounds/:id/comments", (req, res) => {
         } else {
             // create new comment
             Comment.create(req.body.comment, (err, comment) => {
-                if(err) {
+                if (err) {
                     console.log(err);
                 } else {
                     // connect new comment to campground
