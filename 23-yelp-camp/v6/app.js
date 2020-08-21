@@ -17,6 +17,18 @@ app.use(express.json());
 app.use(express.urlencoded());
 seedDB();
 
+// PASSPORT CONFIGURATION
+app.use(require('express-session')({
+    secret: "Secret message to encrypt the passwords",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 app.get('/', (req, res) => {
     res.render('landing')
@@ -110,6 +122,41 @@ app.post("/campgrounds/:id/comments", (req, res) => {
             });
         }
     });
+});
+
+
+// ============================================================================
+// AUTH ROUTES
+// ============================================================================
+app.get("/register", (req, res) => {
+    res.render("register");
+});
+
+//handle sign up logic
+app.post("/register", (req, res) => {
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, (err, user) => {
+        if(err) {
+            console.log(err);
+            return res.redirect("/register");
+        } else {
+            passport.authenticate("local")(req, res, () => {
+                res.redirect("/campgrounds");
+            });
+        }
+    });
+});
+
+// show login form
+app.get("/login", (req, res) => {
+    res.render("login");
+});
+
+// handle login logic
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/campgrounds",
+    failureRedirect: "/login"
+}), (req, res) => {
 });
 
 app.listen(port, () => {
