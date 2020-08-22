@@ -15,6 +15,8 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded());
+
+
 seedDB();
 
 // PASSPORT CONFIGURATION
@@ -30,13 +32,23 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
+// adding a custom middleware - whatever function we provide will be called on every route
+// needs to be added after passport.session() to access user data
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    // console.log(`From the middleware: ${res.locals.currentUser}`);
+    next();
+});
+
+
 app.get('/', (req, res) => {
+    // console.log(res.locals);
     res.render('landing')
 });
 
 // INDEX ROUTE - show all campgrounds in the DB
 app.get('/campgrounds', (req, res) => {
-    // res.render('campgrounds', { campgrounds: campgrounds });
+    // console.log(res.locals.currentUser);
     //Get all campgrounds from the DB
     Campground.find({}, (err, allCampgrounds) => {
         if (err) {
