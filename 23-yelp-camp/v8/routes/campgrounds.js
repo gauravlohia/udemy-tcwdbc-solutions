@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 });
 
 // CREATE ROUTE - save a new campground to the DB
-router.post('/', (req, res) => {
+router.post('/', isLoggedIn, (req, res) => {
     //get data from form and add to campgrounds array
     // eval(require('locus'));
     var name = req.body.name;
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 });
 
 // NEW ROUTE - show the form to create a new campground
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render("campgrounds/new.ejs");
 });
 
@@ -54,5 +54,13 @@ router.get('/:id', (req, res) => {
         }
     });
 });
+
+// middleware
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router;

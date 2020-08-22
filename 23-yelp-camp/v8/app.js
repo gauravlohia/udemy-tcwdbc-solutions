@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 
-seedDB();
+// seedDB();
 
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({
