@@ -5,8 +5,7 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
     methodOverride = require('method-override'),
-    Campground = require('./models/campground'),
-    Comment = require('./models/comment'),
+    flash = require('connect-flash'),
     User = require("./models/user"),
     seedDB = require('./seeds');
 
@@ -22,6 +21,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(methodOverride("_method"));
+app.use(flash());
 
 
 // seedDB();
