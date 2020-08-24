@@ -6,7 +6,7 @@ var express = require('express'),
 // root route
 router.get('/', (req, res) => {
     // console.log(res.locals);
-    res.render('landing')
+    res.render('landing');
 });
 
 
