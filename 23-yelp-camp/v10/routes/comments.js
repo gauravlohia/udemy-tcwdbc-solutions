@@ -1,10 +1,11 @@
 var express = require('express'),
     router = express.Router({mergeParams: true}),
+    middleware = require("../middleware"),
     Campground = require("../models/campground"),
     Comment = require("../models/comment");
 
-// Comments New
-router.get("/new", isLoggedIn,  (req, res) => {
+// NEW ROUTE FOR COMMENTS
+router.get("/new", middleware.isLoggedIn,  (req, res) => {
     //find campground by id
     Campground.findById(req.params.id, (err, campground) => {
         if (err) {
@@ -15,9 +16,9 @@ router.get("/new", isLoggedIn,  (req, res) => {
     });
 });
 
-//Comments Create
+//CREATE ROUTE FOR COMMENTS
 // add isLoggedIn to this route to protect comment creation withoutn logging in
-router.post("/", isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
     // look up campground using id
     Campground.findById(req.params.id, (err, campground) => {
         if (err) {
@@ -45,12 +46,36 @@ router.post("/", isLoggedIn, (req, res) => {
     });
 });
 
-// middleware
-function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
+
+router.get("/:comment_id/edit", middleware.checkCommentOwnership, (req, res) => {
+    Comment.findById(req.params.comment_id, (err, foundComment) => {
+        if(err) {
+            res.redirect("back");
+        } else {
+            res.render("comments/edit", {campground_id: req.params.id, comment: foundComment });;
+        }
+    });
+});
+
+router.put("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) => {
+        if (err) {
+            res.redirect("back");
+        } else {
+            res.redirect(`/campgrounds/${req.params.id}`);
+        }
+    });
+});
+
+// COMMENT DESTROY ROUTE
+router.delete("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
+    Comment.findByIdAndRemove(req.params.comment_id, (err) => {
+        if (err) {
+            res.redirect("back");
+        } else {
+            res.redirect(`/campgrounds/${req.params.id}`);
+        }
+    });
+});
 
 module.exports = router;
