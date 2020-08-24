@@ -1,6 +1,6 @@
 var express = require('express'),
     app = express(),
-    port = 5000,
+    port = 7000,
     mongoose = require('mongoose'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
@@ -43,6 +43,8 @@ passport.deserializeUser(User.deserializeUser());
 // needs to be added after passport.session() to access user data
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     // console.log(`From the middleware: ${res.locals.currentUser}`);
     next();
 });
